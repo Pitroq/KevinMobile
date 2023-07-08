@@ -13,6 +13,7 @@
         android:layout_marginTop="80dp"
         android:background="@drawable/border"
         android:backgroundTint="#3F88C5"
+        android:onClick="openNotepad"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,18 +21,18 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:contentDescription="@string/notepad_item_name"
             android:paddingTop="45dp"
-            app:srcCompat="@drawable/notepad_icon"
-            android:contentDescription="@string/notepad_item_name" />
+            app:srcCompat="@drawable/notepad_icon" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/notepad_item_name"
-            android:paddingBottom="32dp"
-            android:textSize="34sp"
-            android:textColor="@color/font_color"
             android:layout_alignParentBottom="true"
-            android:textAlignment="center" />
+            android:paddingBottom="32dp"
+            android:text="@string/notepad_item_name"
+            android:textAlignment="center"
+            android:textColor="@color/font_color"
+            android:textSize="34sp" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

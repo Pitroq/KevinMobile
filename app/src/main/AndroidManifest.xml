@@ -4,6 +4,7 @@
         android:fullBackupContent="@xml/backup_rules" android:icon="@mipmap/ic_launcher"
         android:label="K.E.V.I.N." android:supportsRtl="true" android:theme="@style/Theme.KevinMobile"
         tools:targetApi="31">
+        <activity android:name=".NotepadActivity"/>
         <activity android:name=".HomeActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
