@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">KevinMobile</string>
+    <string name="notepad_item_name">Notepad</string>
 </resources>
