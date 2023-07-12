@@ -27,8 +27,6 @@ public class NoteActivity extends AppCompatActivity {
 
         noteTitleEditText = findViewById(R.id.noteTitleEditText);
         noteContentEditText = findViewById(R.id.noteContentEditText);
-
-
     }
 
     @Override
@@ -41,14 +39,10 @@ public class NoteActivity extends AppCompatActivity {
 
     private void loadNote() {
         Note note = notepad.getNote(noteId);
-        System.out.println(noteId);
-
-        System.out.println(note.getTitle());
         noteTitleEditText.setText(note.getTitle());
 
         String noteContent = note.getNoteContent();
         noteContent = noteContent.replace("{enter}", "\n");
-        System.out.println(noteContent);
         noteContentEditText.setText(noteContent);
     }
 

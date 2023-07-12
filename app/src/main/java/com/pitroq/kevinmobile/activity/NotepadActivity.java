@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
@@ -15,7 +14,9 @@ import com.pitroq.kevinmobile.Note;
 import com.pitroq.kevinmobile.Notepad;
 import com.pitroq.kevinmobile.R;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NotepadActivity extends AppCompatActivity {
     private static final String HOST = "http://192.168.1.40:8080/kevin/api/";
@@ -65,7 +66,7 @@ public class NotepadActivity extends AppCompatActivity {
         }
     }
 
-    public void loadFromDatabase(View view) {
+    public void loadNotepadFromDB(View view) {
         String url = HOST + "getLatestNotepadJSON.php";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 response -> {
@@ -77,4 +78,33 @@ public class NotepadActivity extends AppCompatActivity {
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
+    public void sendNotepadToDB(View view) {
+        System.out.println("SENDING TO DB");
+        String url = HOST + "sendNotepadJSON.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                response -> System.out.println(response),
+                error -> System.out.println("error")
+        ) {
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+
+                String notepadJSON = notepad.getFileContent();
+                params.put("notepadJSON", notepadJSON);
+                return params;
+            }
+        };
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
