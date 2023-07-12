@@ -40,6 +40,7 @@ public class Notepad extends JsonFileManager {
     public void fillNotes(String content) {
         Note[] fileNotes = gson.fromJson(content, Note[].class);
         notes.clear();
+        id = 0;
         for (Note fileNote : fileNotes) {
             String title = fileNote.getTitle();
             String noteContent = fileNote.getNoteContent();

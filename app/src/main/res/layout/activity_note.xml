@@ -16,8 +16,8 @@
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:paddingHorizontal="20dp"
-        android:text="ssdfsdfsdfsdffd"
         android:textColor="@color/font_color"
+        android:background="@color/secondary_background_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -33,7 +33,6 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="Name"
         android:textColor="@color/font_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,6 +43,7 @@
     <Button
         android:layout_width="160dp"
         android:layout_height="wrap_content"
+        android:onClick="deleteNote"
         android:text="Delete"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -56,6 +56,7 @@
     <Button
         android:layout_width="160dp"
         android:layout_height="wrap_content"
+        android:onClick="updateNote"
         android:text="Update"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -30,6 +30,12 @@ public class NotepadActivity extends AppCompatActivity {
 
         notesListLayout = findViewById(R.id.notesListLayout);
         notepad = new Notepad(this);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         notepad.loadNotesFromFile();
         fillList();
     }
@@ -41,7 +47,6 @@ public class NotepadActivity extends AppCompatActivity {
 
     private void fillList() {
         notesListLayout.removeAllViews();
-
         List<Note> notes = notepad.getNotes();
         for (Note note : notes) {
             Button button = new Button(getApplicationContext());
