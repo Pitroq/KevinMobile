@@ -1,10 +1,11 @@
-package com.pitroq.kevinmobile;
+package com.pitroq.kevinmobile.activity;
 
 import android.content.Intent;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatDelegate;
+import com.pitroq.kevinmobile.R;
 
 public class HomeActivity extends AppCompatActivity {
 
