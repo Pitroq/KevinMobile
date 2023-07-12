@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import com.android.volley.Request;
@@ -72,8 +73,9 @@ public class NotepadActivity extends AppCompatActivity {
                 response -> {
                     notepad.fillNotes(response);
                     fillList();
+                    Toast.makeText(this, "Successfully received data from the database", Toast.LENGTH_LONG).show();
                 },
-                error -> System.out.println("error")
+                error -> Toast.makeText(this, "An error occurred while receiving data from the database", Toast.LENGTH_LONG).show()
         );
         Volley.newRequestQueue(this).add(stringRequest);
     }
@@ -82,8 +84,8 @@ public class NotepadActivity extends AppCompatActivity {
         System.out.println("SENDING TO DB");
         String url = HOST + "sendNotepadJSON.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                response -> System.out.println(response),
-                error -> System.out.println("error")
+                response -> Toast.makeText(this, "Successfully sent data to the database", Toast.LENGTH_LONG).show(),
+                error -> Toast.makeText(this, "An error occurred while sending data to the database", Toast.LENGTH_LONG).show()
         ) {
             @Override
             protected Map<String,String> getParams(){
