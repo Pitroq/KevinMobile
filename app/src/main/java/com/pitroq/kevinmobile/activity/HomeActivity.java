@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 import com.pitroq.kevinmobile.R;
 
 public class HomeActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

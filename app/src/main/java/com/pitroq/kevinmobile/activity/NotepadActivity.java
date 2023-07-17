@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 public class NotepadActivity extends AppCompatActivity {
-    private static final String HOST = "http://192.168.1.40:8080/kevin/api/";
+    private static final String API_URL = "http://192.168.1.40:8080/kevin/api/";
     private Notepad notepad;
     private LinearLayout notesListLayout;
 
@@ -32,7 +32,6 @@ public class NotepadActivity extends AppCompatActivity {
 
         notesListLayout = findViewById(R.id.notesListLayout);
         notepad = new Notepad(this);
-
     }
 
     @Override
@@ -45,6 +44,7 @@ public class NotepadActivity extends AppCompatActivity {
     public void createNewNote(View view) {
         notepad.addNote("Untitled note", "");
         fillList();
+        Toast.makeText(this, "A new note has been created", Toast.LENGTH_SHORT).show();
     }
 
     private void fillList() {
@@ -55,6 +55,7 @@ public class NotepadActivity extends AppCompatActivity {
             button.setBackgroundColor(ContextCompat.getColor(this, R.color.secondary_background_color));
             button.setTextColor(ContextCompat.getColor(this, R.color.font_color));
             button.setTextSize(16);
+            button.setTransformationMethod(null);
             button.setPadding(0, 60, 0, 60);
             button.setText(note.getTitle());
             button.setTag(note.getId());
@@ -68,8 +69,8 @@ public class NotepadActivity extends AppCompatActivity {
     }
 
     public void loadNotepadFromDB(View view) {
-        String url = HOST + "getLatestNotepadJSON.php";
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+        String url = API_URL + "getLatestNotepadJSON.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 response -> {
                     notepad.fillNotes(response);
                     fillList();
@@ -81,15 +82,14 @@ public class NotepadActivity extends AppCompatActivity {
     }
 
     public void sendNotepadToDB(View view) {
-        System.out.println("SENDING TO DB");
-        String url = HOST + "sendNotepadJSON.php";
+        String url = API_URL + "sendNotepadJSON.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 response -> Toast.makeText(this, "Successfully sent data to the database", Toast.LENGTH_LONG).show(),
                 error -> Toast.makeText(this, "An error occurred while sending data to the database", Toast.LENGTH_LONG).show()
         ) {
             @Override
             protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
+                Map<String,String> params = new HashMap<>();
 
                 String notepadJSON = notepad.getFileContent();
                 params.put("notepadJSON", notepadJSON);

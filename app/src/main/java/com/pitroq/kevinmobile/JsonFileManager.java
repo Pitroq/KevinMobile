@@ -51,9 +51,7 @@ public class JsonFileManager {
         try (FileInputStream in = new FileInputStream(file)) {
             in.read(bytes);
         }
-        catch (IOException ignored) {
-
-        }
+        catch (IOException ignored) {}
 
         return new String(bytes);
     }
