@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.pitroq.kevinmobile.Note;
 import com.pitroq.kevinmobile.Notepad;
@@ -33,12 +33,12 @@ public class NoteActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         noteId = Integer.parseInt(getIntent().getStringExtra("noteId"));
-        System.out.println("NOTE, ONSTART(): " + noteId);
         loadNote();
     }
 
     private void loadNote() {
         Note note = notepad.getNote(noteId);
+
         noteTitleEditText.setText(note.getTitle());
 
         String noteContent = note.getNoteContent();
@@ -47,7 +47,9 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     public void deleteNote(View view) {
+        String noteTitle = notepad.getNote(noteId).getTitle();
         notepad.deleteNote(noteId);
+        Toast.makeText(this, "The note '" + noteTitle + "' has been deleted", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, NotepadActivity.class);
         startActivity(intent);
     }
@@ -55,7 +57,8 @@ public class NoteActivity extends AppCompatActivity {
     public void updateNote(View view) {
         String newTitle = noteTitleEditText.getText().toString();
         String newContent = noteContentEditText.getText().toString();
-        newContent = newContent.replace("\\n", "{enter}");
+        newContent = newContent.replace("\n", "{enter}");
         notepad.updateNote(noteId, newTitle, newContent);
+        Toast.makeText(this, "The note has been updated", Toast.LENGTH_SHORT).show();
     }
 }
