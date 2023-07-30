@@ -47,7 +47,6 @@ public class JsonFileManager {
 
         byte[] bytes = new byte[length];
 
-
         try (FileInputStream in = new FileInputStream(file)) {
             in.read(bytes);
         }

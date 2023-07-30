@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import com.android.volley.Request;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.pitroq.kevinmobile.Note;
@@ -23,6 +24,7 @@ public class NotepadActivity extends AppCompatActivity {
     private static final String API_URL = "http://192.168.1.40:8080/kevin/api/";
     private Notepad notepad;
     private LinearLayout notesListLayout;
+    private final String API_KEY = "1230983218901";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,12 +74,23 @@ public class NotepadActivity extends AppCompatActivity {
         String url = API_URL + "getLatestNotepadJSON.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 response -> {
+                    if (response.isEmpty()) {
+                        Toast.makeText(this, "An error occurred while receiving data from the database", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     notepad.fillNotes(response);
                     fillList();
                     Toast.makeText(this, "Successfully received data from the database", Toast.LENGTH_LONG).show();
                 },
                 error -> Toast.makeText(this, "An error occurred while receiving data from the database", Toast.LENGTH_LONG).show()
-        );
+        ){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<>();
+                params.put("api_key", API_KEY);
+                return params;
+            }
+        };
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
@@ -92,6 +105,7 @@ public class NotepadActivity extends AppCompatActivity {
                 Map<String,String> params = new HashMap<>();
 
                 String notepadJSON = notepad.getFileContent();
+                params.put("api_key", API_KEY);
                 params.put("notepadJSON", notepadJSON);
                 return params;
             }
